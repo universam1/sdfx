@@ -18,12 +18,12 @@ import (
 
 //-----------------------------------------------------------------------------
 
-var cap_radius = thread_radius + 7
-var cap_height = 25.0
+var cap_radius = thread_radius + 6
+var cap_height = 23.0
 var cap_thickness = 8.0
 var thread_pitch = 1.5
 
-var thread_diameter = 16.5
+var thread_diameter = 18.5
 var thread_radius = thread_diameter / 2.0
 
 //-----------------------------------------------------------------------------
@@ -53,7 +53,7 @@ func gas_cap() sdf.SDF3 {
 }
 
 func hole() sdf.SDF3 {
-	t, err := sdf.Cylinder3D(cap_height, 13/2.0, 0)
+	t, err := sdf.Cylinder3D(cap_height, 12.0/2.0, 0)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -63,8 +63,8 @@ func hole() sdf.SDF3 {
 //---------------------------------go--------------------------------------------
 
 func main() {
-	// render.RenderSTL(gas_cap(), 300, "cap.stl")
-	render.RenderSTLSlow(gas_cap(), 300, "cap.stl")
+	render.RenderSTLSlow(gas_cap(), 200, "cap.stl")
+	// render.RenderSTLSlow(gas_cap(), 300, "cap.stl")
 }
 
 //-----------------------------------------------------------------------------

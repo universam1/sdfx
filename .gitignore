@@ -6,3 +6,4 @@ tools/parsetab.py
 examples/*/*.dxf
 examples/*/*.png
 examples/*/*.svg
+examples/*/*.stl

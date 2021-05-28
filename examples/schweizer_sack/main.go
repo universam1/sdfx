@@ -18,17 +18,19 @@ import (
 
 //-----------------------------------------------------------------------------
 
-var thread_diameter = 40.5
+var thread_diameter = 45.0
 var thread_pitch = 3.0
 var cap_radius = thread_diameter/2.0 + 6
-var cap_height = 25.0
-var cap_thickness = 8.0
+var cap_height = cap_thickness + 15.0
+var cap_thickness = 2.0
 
 var ri = 19.0 / 2
 var ra = ri + 2.0
 var h = 5.0
 var numRing = 6
-var rhole = ri - 2.0
+var rhole = 25 / 2.0
+
+// var rhole = ri - 2.0
 
 //-----------------------------------------------------------------------------
 
@@ -52,11 +54,23 @@ func cap_inner() sdf.SDF3 {
 	return sdf.Transform3D(screw, sdf.Translate3d(sdf.V3{0, 0, -cap_thickness}))
 }
 
-func gas_cap() sdf.SDF3 {
+func full_cap() sdf.SDF3 {
 	return sdf.Difference3D(
 		sdf.Union3D(
 			cap_outer(),
 			tulle(),
+		),
+		sdf.Union3D(
+			cap_inner(),
+			hole()),
+	)
+}
+
+func ring_cap() sdf.SDF3 {
+	return sdf.Difference3D(
+		sdf.Union3D(
+			cap_outer(),
+			// tulle(),
 		),
 		sdf.Union3D(
 			cap_inner(),
@@ -76,7 +90,8 @@ func tulle() sdf.SDF3 {
 
 	points := []sdf.V2{
 		{0, 0},
-		{ra, 0},
+		{ri, 0},
+		{ra, h / 3},
 		{ri, h},
 		{0, h},
 	}
@@ -105,9 +120,10 @@ func tulle() sdf.SDF3 {
 //---------------------------------go--------------------------------------------
 
 func main() {
-	render.RenderSTLSlow(gas_cap(), 200, "sack_adapter.stl")
+	render.RenderSTLSlow(ring_cap(), 250, "sack_adapter45.stl")
+	// render.RenderSTLSlow(full_cap(), 200, "sack_adapter.stl")
 
-	// render.RenderSTLSlow(gas_cap(), 300, "cap.stl")
+	// render.RenderSTLSlow(full_cap(), 300, "cap.stl")
 }
 
 //-----------------------------------------------------------------------------

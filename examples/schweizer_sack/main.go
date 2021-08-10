@@ -25,12 +25,12 @@ var cap_radius = thread_diameter/2.0 + 5
 var cap_height = cap_thickness + 15.0
 var cap_thickness = 5.0
 
-var ri = 10.0 / 2
+var ri = 11.0 / 2
 
 // var ri = 19.0 / 2
-var ra = ri + 1.5
+var ra = ri + 0.5
 var h = 5.0
-var numRing = 6
+var numRing = 4
 var rhole = ra + 1.0
 
 // var rhole = 25 / 2.0
@@ -72,7 +72,7 @@ func full_cap() sdf.SDF3 {
 }
 func tulle_inlet() sdf.SDF3 {
 
-	t, err := sdf.Cylinder3D(10*(cap_height), ri-1.2, 0)
+	t, err := sdf.Cylinder3D(10*(cap_height), ri-2.2, 0)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -81,9 +81,7 @@ func tulle_inlet() sdf.SDF3 {
 			inlet(),
 			tulle(),
 		),
-		sdf.Union3D(
-
-			t),
+		sdf.Union3D(t),
 	)
 }
 
@@ -162,8 +160,8 @@ func inlet() sdf.SDF3 {
 //---------------------------------go--------------------------------------------
 
 func main() {
-	render.RenderSTLSlow(ring_cap(), 250, fmt.Sprintf("ring_cap_%.0fx%.0f_l%0.f.stl", thread_diameter, thread_pitch, rhole))
-	render.RenderSTLSlow(tulle_inlet(), 250, fmt.Sprintf("tulle_inlet%.0fx.stl", ri))
+	// render.RenderSTLSlow(ring_cap(), 250, fmt.Sprintf("ring_cap_%.0fx%.0f_l%0.f.stl", thread_diameter, thread_pitch, rhole))
+	render.RenderSTLSlow(tulle_inlet(), 250, fmt.Sprintf("tulle_inlet%.0f.stl", ri*2))
 	// render.RenderSTLSlow(full_cap(), 200, "sack_adapter.stl")
 
 	// render.RenderSTLSlow(full_cap(), 300, "cap.stl")

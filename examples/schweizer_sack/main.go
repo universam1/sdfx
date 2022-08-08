@@ -19,28 +19,34 @@ import (
 
 //-----------------------------------------------------------------------------
 
-var thread_diameter = 44.0
-var thread_pitch = 3.0
+// var thread_diameter = 44.0
+// var thread_pitch = 3.0
+// var cap_radius = thread_diameter/2.0 + 5
+// var cap_height = cap_thickness + 15.0
+// var cap_thickness = 5.0
+
+// var ri = 11.0 / 2
+// var ra = ri + 0.5
+// var h = 5.0
+// var numRing = 4
+// var rhole = ra + 1.0
+
+var thread_diameter = 96.5
+var thread_pitch = 8.0
 var cap_radius = thread_diameter/2.0 + 5
-var cap_height = cap_thickness + 15.0
+var cap_height = cap_thickness + 25.0
 var cap_thickness = 5.0
 
-var ri = 11.0 / 2
-
-// var ri = 19.0 / 2
+var ri = 60.0 / 2
 var ra = ri + 0.5
 var h = 5.0
 var numRing = 4
 var rhole = ra + 1.0
 
-// var rhole = 25 / 2.0
-
-// var rhole = ri - 2.0
-
 //-----------------------------------------------------------------------------
 
 func cap_outer() sdf.SDF3 {
-	t, err := obj.KnurledHead3D(cap_radius, cap_height, cap_radius*0.25)
+	t, err := obj.KnurledHead3D(cap_radius, cap_height, cap_radius*0.075)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -160,8 +166,8 @@ func inlet() sdf.SDF3 {
 //---------------------------------go--------------------------------------------
 
 func main() {
-	// render.RenderSTLSlow(ring_cap(), 250, fmt.Sprintf("ring_cap_%.0fx%.0f_l%0.f.stl", thread_diameter, thread_pitch, rhole))
-	render.RenderSTLSlow(tulle_inlet(), 250, fmt.Sprintf("tulle_inlet%.0f.stl", ri*2))
+	render.RenderSTLSlow(ring_cap(), 250, fmt.Sprintf("ring_cap_%.0fx%.0f_l%0.f.stl", thread_diameter, thread_pitch, rhole))
+	// render.RenderSTLSlow(tulle_inlet(), 250, fmt.Sprintf("tulle_inlet%.0f.stl", ri*2))
 	// render.RenderSTLSlow(full_cap(), 200, "sack_adapter.stl")
 
 	// render.RenderSTLSlow(full_cap(), 300, "cap.stl")
